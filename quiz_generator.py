@@ -12,7 +12,7 @@ class QuizGenerator:
                 # Prompting ChatGPT with corpora
                 logger.info("Prompting ChatGPT")     
 
-                formatted_input = chunks + "\n\n".join(user_query)           
+                formatted_input = chunks + "\n\n" + f"**USER QUERY:** {user_query}"         
 
                 # Create the prompt using the agent's method
                 prompt = agent.prompt(formatted_input)
