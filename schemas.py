@@ -8,11 +8,11 @@ class Answers(BaseModel):
 
 # Report generation
 class Question(BaseModel):
-    question: str
+    question_text: str
     answers: List[Answers]
     hint: str
 
-class Quiz(BaseModel):
+class QuizSchema(BaseModel):
     quiz_name: str
     questions: List[Question]
 
