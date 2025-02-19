@@ -37,7 +37,12 @@ class VectorManager:
                 include_metadata=True
             )["matches"]
 
-            return chunks
+            joined_chunks = ""
+            for chunk in chunks:
+                metadata = chunk.metadata
+                joined_chunks += metadata["chunk"] + "\n\n"
+
+            return joined_chunks
 
         except Exception as e:
                 logger.error(f"An error occurred while querying indexes: {e}")
