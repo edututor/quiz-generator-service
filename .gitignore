@@ -1,2 +1,3 @@
 .env
 tester_dummy.py
+test.db

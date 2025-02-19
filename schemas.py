@@ -16,3 +16,6 @@ class QuizSchema(BaseModel):
     quiz_name: str
     questions: List[Question]
 
+class QuizRequest(BaseModel):
+    document_name: str
+    user_query: str
