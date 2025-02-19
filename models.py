@@ -12,7 +12,7 @@ class QuizModel(Base):
     created_at = Column(DateTime, server_default=text("CURRENT_TIMESTAMP"))
 
     # One-to-many relationship: a quiz can have multiple questions
-    questions = relationship("QuizQuestions", back_populates="quiz", cascade="all, delete-orphan")
+    questions = relationship("QuizQuestionsModel", back_populates="quiz", cascade="all, delete-orphan")
     
 
 class QuizQuestionsModel(Base):
@@ -25,10 +25,10 @@ class QuizQuestionsModel(Base):
     hint = Column(String, nullable=False, unique=False)
 
     # Relationship back to the Quiz
-    quiz = relationship("Quizzes", back_populates="questions")
+    quiz = relationship("QuizModel", back_populates="questions")
 
     # One-to-many relationship: a question can have multiple answers
-    answers = relationship("Answers", back_populates="question", cascade="all, delete-orphan")
+    answers = relationship("AnswersModel", back_populates="question", cascade="all, delete-orphan")
 
 
 class AnswersModel(Base):
@@ -41,5 +41,5 @@ class AnswersModel(Base):
     is_correct_answer = Column(Boolean, nullable=False, unique=False)
 
     # Relationship back to the QuizQuestions
-    question = relationship("QuizQuestions", back_populates="answers")
+    question = relationship("QuizQuestionsModel", back_populates="answers")
 

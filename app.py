@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from agents import quiz_generator_agent
 from openai_client import OpenAiClient
-from schemas import QuizSchema, Question, Answers
+from schemas import QuizSchema, Question, Answers, QuizRequest
 from vector_manager import VectorManager
 from pinecone import Pinecone
 from config import settings
@@ -36,11 +36,12 @@ def get_db():
 
 
 @app.post("/api/generate-quiz")
-def generate_analysis(
-    document_name: str = Query(...),
-    user_query: str = Query(...),
+def main(
+    request: QuizRequest,
     db: Session = Depends(get_db)  # <--- Inject DB session here
 ):
+    document_name = request.document_name
+    user_query = request.user_query
     try:
         # Initialize required components
         client = OpenAiClient()
@@ -49,7 +50,7 @@ def generate_analysis(
         quiz_generator = QuizGenerator()
 
         # Convert to lowercase if desired
-        document_name = document_name.lower()
+        # document_name = document_name.lower()
 
         # Create embeddings for user query
         logger.info("Creating embeddings for user_query...")
