@@ -23,9 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create tables
-Base.metadata.create_all(bind=engine)
-
 # Dependency for DB session
 def get_db():
     db = SessionLocal()
