@@ -1,4 +1,4 @@
 .env
-tester_dummy.py
+venv
 test.db
 __pycache__
