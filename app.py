@@ -27,6 +27,7 @@ app.add_middleware(
 def get_db():
     db = SessionLocal()
     try:
+        Base.metadata.create_all(bind=engine)
         yield db
     finally:
         db.close()
@@ -70,6 +71,7 @@ def main(
             QuizSchema, 
             client
         )
+        logger.info(f"Number of questions: {len(quiz_response.questions)}")
 
         # Create and save the quiz record
         quiz = QuizModel(
