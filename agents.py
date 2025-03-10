@@ -23,8 +23,9 @@ quiz_generator_agent = Agent(
     ),
     function=(
         "Your function is to analyze each provided chunk of text or data and "
-        "transform it into a set of quiz questions. You must take into consideration"
-        "the USER QUERY to better understand what kind of questions you should generate"
+        "transform it into a set of 10 to 20 quiz questions. You must take into consideration"
+        "the USER QUERY to better understand what kind of questions you should generate."
+        "You can use your own knowledge of the topic if necessary to enhance the quality of the quiz"
         "Each question must include: "
         "1) A single question text. "
         "2) A list of possible answers, each containing an 'answer' string "

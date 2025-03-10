@@ -32,7 +32,7 @@ class VectorManager:
             logger.info(f"Retrieving top-k relevant chunks for company: {document_name}")
             chunks = text_index.query(
                 vector=query_embeddings,
-                top_k=25,
+                top_k=30,
                 filter={"document_name": {"$eq": document_name}},
                 include_metadata=True
             )["matches"]
