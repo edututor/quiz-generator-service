@@ -2,9 +2,9 @@ from loguru import logger
 from fastapi import FastAPI, HTTPException, Query, Depends
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from agents import quiz_generator_agent
+from agents import quiz_generator_agent, math_tutor_agent
 from openai_client import OpenAiClient
-from schemas import QuizSchema, Question, Answers, QuizRequest
+from schemas import QuizSchema, Question, Answers, QuizRequest, MathRequest
 from vector_manager import VectorManager
 from pinecone import Pinecone
 from config import settings
@@ -113,6 +113,28 @@ def main(
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail="An internal error occurred while processing the request.")
+
+
+@app.post("/api/math-tutor")
+async def math_tutor(request: MathRequest):
+    """
+    AI Math Tutor that explains concepts and solves problems.
+
+    No need for db injection/session yet as this is just to investigate how useful a math agent could be
+    """
+    try:
+        client = OpenAiClient()
+
+        # Construct AI prompt
+        prompt = math_tutor_agent.prompt(f"Math question: {request.question}")
+        
+        # Query OpenAI API
+        response = client.query_gpt(prompt)
+        
+        return JSONResponse(status_code=200, content={"response": response})
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error in Math Tutor API: {str(e)}")
 
 
 if __name__ == "__main__":

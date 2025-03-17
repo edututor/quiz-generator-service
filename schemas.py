@@ -19,3 +19,6 @@ class QuizSchema(BaseModel):
 class QuizRequest(BaseModel):
     document_name: str
     user_query: str
+
+class MathRequest(BaseModel):
+    question: str

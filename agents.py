@@ -14,6 +14,21 @@ class Agent:
         return [{"role": "system", "content": system_prompt}, {"role": "user", "content": input_prompt}]
 
 
+class MathTutorAgent(Agent):
+    def __init__(self):
+        super().__init__(
+            name="Math AI Tutor",
+            role="An AI math tutor that explains concepts and solves math problems for students.",
+            function=(
+                "Your job is to help students with math problems. "
+                "You should explain concepts, solve equations step-by-step, "
+                "and provide clear, structured explanations. "
+                "If the question involves a formula, show how to apply it. "
+                "Be patient and break complex ideas into simpler parts."
+            )
+        )
+
+
 # Quiz generator agent:
 quiz_generator_agent = Agent(
     name="Quiz Generator Agent",
@@ -38,3 +53,5 @@ quiz_generator_agent = Agent(
     )
 )
 
+# Math generator agent 
+math_tutor_agent = MathTutorAgent()
